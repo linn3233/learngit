@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ch">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>备忘录</title>
+        <link rel="stylesheet" href="../bootstrap/bootstrap.css">
+        <style>
+            ul li{ list-style: none; } 
+            .box{
+                width: 700px;
+                margin-top: 20px;
+            }
+            #imgbox{
+                position: relative; width: 700px; height: 125px;
+            }
+            #imgweather{
+                 width:500px; position: absolute; left: 100px; 
+            }
+            #add input{
+                width: 100%
+            }
+            .footer{
+                font-family: 华文彩云， 微软雅黑;
+                font-weight:bold;
+                font-style: italic;
+                text-align: justify;
+                width: auto; height: 30px; background-color:#F1F3F4;
+                margin-top: -10px;
+                position: relative;
+            }
+            .remove{
+                color:red;
+            }
+            .clear{
+                font-style: normal;
+                font-family: 'Courier New', Courier, monospace;
+                right: 10px;
+                position: absolute;
+                border: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app" class="container box">
+            <div id="imgbox">
+                <div id="imgweather">
+                     <img src="./备忘录.jpg" alt="横幅：小小备忘录" title="小小备忘录" width="100%">
+                </div>
+            </div>
+            <br><br>
+
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-9" id="add">
+                        <input class="form-control" placeholder="请输入代办事项" @keyup.enter="add" autofocus autocomplete="off" v-model="inputV"/>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div id="add">
+                <table class="table table-hover">
+                    <tr v-for="(item,index) in toDoList">
+                            <td class="index col-sm-1" >
+                                {{index + 1 + "."}}
+                            </td>
+                            <td class="toDo col-sm-7" >
+                                {{item}}
+                            </td>
+                            <td class="remove col-sm-1" @click="remove(index)">
+                                X
+                            </td>
+                    </tr>
+                </table>
+                </div>
+            </div>
+
+            <div class="row footer">
+                <span class="count">
+                    <strong>
+                        {{toDoList.length}}
+                    </strong>
+                    items
+                </span>
+                <a class="btn btn-default clear" href="#" role="button" @click="clear" v-if="toDoList.length!=0">clear</a>
+            </div>
+            
+        </div>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            var app = new Vue({
+            el:"#app",
+            data:{
+                toDoList:["学习HTML","学习CSS","学习JS"],
+                inputV:""
+            },
+            methods: {
+                add(){
+                    if(this.inputV == "")
+                    {
+                        alert("请输入代办事项")
+                    }
+                    else{
+                        this.toDoList.push(this.inputV),
+                        this.inputV = ""
+                    }
+                },
+                remove(index){
+                    this.toDoList.splice(index,1)
+                },
+                clear(){
+                    this.toDoList=[]
+                }
+            }
+            })
+        </script>
+    </body>
+</html>

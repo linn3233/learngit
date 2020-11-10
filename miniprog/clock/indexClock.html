@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ch">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>时钟与秒表</title>
+        <link rel="stylesheet" href="../bootstrap/bootstrap.css">
+        <style>
+            *{ margin:0; padding:0;}
+            ul{ list-style: none; } 
+            .box{
+                width: 1200px;
+                margin-top: 20px;
+            }
+            .imgbox{
+                position: relative; width: 600px; height: 125px;
+            }
+            .imgweather{
+                 width:400px; position: absolute; left: 100px; 
+            }
+
+            #clock{ width:300px; height:300px; border:1px black solid; margin:30px auto; border-radius: 50%;position: relative; overflow: hidden;}
+            #clock ul{ width:100%; height:100%; position: relative;}
+            #clock ul li{ width:1px; height:8px; background:black; position: absolute; left:50%; top:0; transform-origin: center 150px;}
+        /*  #time ul li:nth-child(2){ transform: rotate(6deg);}
+            #time ul li:nth-child(3){ transform: rotate(12deg);} */
+            #hour1{ width: 6px; height:50px; background:black; position: absolute; left:50%; top:50%; margin:-50px 0 0 -3px; transform-origin: center bottom;}
+            #minu1{ width: 4px; height:80px; background:black; position: absolute; left:50%; top:50%; margin:-80px 0 0 -2px; transform-origin: center bottom;}
+            #sec1{ width: 2px; height:120px; background:black; position: absolute; left:50%; top:50%; margin:-120px 0 0 -1px; transform-origin: center bottom;}
+            #poit1{ width:20px; height:20px; background:red; position: absolute; left:50%; top:50%; margin:-10px; border-radius: 50%;}
+
+            .timeall{
+                 width:150px; height: 200px; padding: 20px;
+                text-align: center;position: absolute; left: 270px; background-color:#FFE793; border: 1px solid black ; overflow: hidden;
+            }
+            .timeall span{
+                font-size: 22px
+            }
+            .timeall button{
+                width: 100px; height: 30px; font-size: 16px; margin-top: 20px; background-color: black; color: white
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container box" id="app">
+            <div class="col-sm-6">
+                <div class="imgbox">
+                    <div class="imgweather">
+                         <img src="./时钟.jpg" alt="横幅：小小时钟" title="小小时钟" width="100%">
+                    </div>
+                </div>
+                <div id="clock">
+                    <ul id="face"></ul>
+                    <div id="hour1"></div>
+                    <div id="minu1"></div>
+                    <div id="sec1"></div>
+                    <div id="poit1"></div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="imgbox">
+                    <div class="imgweather">
+                         <img src="./计时器1.jpg" alt="横幅：小小计时器1" title="小小计时器1" width="100%">
+                    </div>
+                </div>
+                <br><br>
+                <div class="imgbox timer">
+                    <div class="timeall">
+                        <span>{{hour}}</span>
+                        <span>:</span>
+                        <span>{{min}}</span>
+                        <span>:</span>
+                        <span>{{sec}}</span>
+                        <button @click="controlbut">{{control}}
+                        </button>
+                        <button @click="restart">
+                            复位
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="./mainclock.js"></script>
+        
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ch">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>打砖块</title>
+        <link rel="stylesheet" href="../bootstrap/bootstrap.css">
+        <style>
+            ul li{ list-style: none; } 
+            .box{
+                width: 700px;
+                margin-top: 20px;
+            }
+            #imgbox{
+                position: relative; width: 700px; height: 125px;
+            }
+            #imgweather{
+                 width:500px; position: absolute; left: 100px; 
+            }
+
+            
+			#hit{width: 499px; height: 500px; border: 2px solid #5F6368; margin: 20px auto; position: relative; overflow: hidden;}
+			#ball{width: 20px; height: 20px; background-color: #FF3A2F; position: absolute; border-radius: 50%; left: 240px; bottom: 20px}
+			#bat{width: 100px; height: 20px; background-color:#FCBF00; position: absolute; bottom: 0px; left: 200px}
+			#brick div{width: 99px; height: 18px; border: 1px solid black; float: left;}
+        </style>
+    </head>
+    <body>
+        <div class="container box">
+            <div id="imgbox">
+                <div id="imgweather">
+                     <img src="./打砖块.jpg" alt="横幅：小小打砖块" title="小小打砖块" width="100%">
+                </div>
+            </div>
+            <!-- <button>start</button> -->
+            <br>
+            <div id="app">
+                <div class="row">
+                    <!-- Standard button -->
+                    <button type="button" class="btn btn-default col-sm-3" v-show="!isGame" @click="hitbr(30)">30块砖</button>
+                    <button type="button" class="btn btn-primary col-sm-3" v-show="!isGame" @click="hitbr(40)">40块砖</button>
+                    <button type="button" class="btn btn-success col-sm-3" v-show="!isGame" @click="hitbr(50)">50块砖</button>
+                    <button type="button" class="btn btn-info col-sm-3" v-show="!isGame" @click="hitbr(70)">70块砖</button>
+                </div>
+                <div id="hit">
+                    <div id = 'ball'></div>
+                    <div id = 'bat'></div>
+                    <div id = 'brick'></div>
+                </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="./hitbrick.js"></script>
+    </body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ch">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>我的小项目合集</title>
+    </head>
+    <link rel="stylesheet" href="./bootstrap/bootstrap.css">
+        <style>
+            ul li{ list-style: none; } 
+            .box{
+                width: 700px;
+                margin-top: 20px;
+            }
+            #imgbox{
+                position: relative; width: 700px; height: 210px;
+            }
+            #imgweather{
+                 width:500px; position: absolute; left: 100px; 
+            }
+
+            #ul1 li{list-style: none; width: 457px; height: 180px; margin: 10px; float: left;}
+            #ul1 li img{width: 100%;}
+            #ul1 {position: absolute; left: 0px}
+            #banner{width: 500px; height: 180px; border: 1px solid black; position: relative; overflow: hidden;}
+
+            .table li{
+                text-align: center;
+            }
+            .table li a{
+                width: 150px; height: 35px;
+            }
+            h2{
+                text-align: center;
+                font-style: italic;
+                color: #FE2212;
+            }
+        </style>
+        <script>
+            window.onload = function(){
+                var oUl1 = document.getElementById("ul1");
+                var oDiv1 = document.getElementById("banner");
+
+                /* 
+                    直接把这四张图片再添加到末尾
+                */
+                oUl1.innerHTML += oUl1.innerHTML;
+                //重新设置一下ul的宽
+                oUl1.style.width = 500 * 6 + 'px';
+
+                setInterval(function(){
+                    //让ul向左运动一个图片的宽
+                    startMove(oUl1, {left: oUl1.offsetLeft - 500}, function(){
+                        if(oUl1.offsetLeft <= -oUl1.offsetWidth / 2){
+                            oUl1.style.left = "0px";
+                        }
+                    })
+                }, 2000);
+            };
+            function startMove(node, cssObj, complete){//complete = show;
+                clearInterval(node.timer);
+                node.timer = setInterval(function(){
+                    var isEnd = true; //假设所有的动画都到达目的值。
+                    for(var attr in cssObj){
+                        var iTarget = cssObj[attr];
+                        //计算速度
+                        var iCur = null;
+                        if(attr == "opacity"){
+                            iCur = parseInt(parseFloat(getStyle(node, "opacity")) * 100);
+                        }else{
+                            iCur = parseInt(getStyle(node, attr))
+                        }
+                        
+                        var speed = (iTarget - iCur) / 8;
+                        speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+
+                        
+                        if(attr == "opacity"){
+                            iCur += speed;
+                            node.style.opacity = iCur / 100;
+                            node.style.filter = "alpha(opacity=" + iCur +  ")";
+                        }else{
+                            node.style[attr] = iCur + speed + 'px';
+                        }  
+
+                        if(iCur != iTarget){
+                            isEnd = false;
+                        }
+                    }
+
+                    if(isEnd){
+                        clearInterval(node.timer);
+                        if(complete){
+                            complete.call(node);
+                        }
+                    }
+                }, 30);
+            }
+
+            //获取当前有效样式浏览器兼容的写法
+            function getStyle(node, cssStr){
+                return node.currentStyle ? node.currentStyle[cssStr] : getComputedStyle(node)[cssStr];
+            }
+        </script>
+    <body>
+        <div class="container box">
+            
+            <div id="imgbox">
+                <div id="imgweather">
+                    <div id="banner">
+                        <ul id = 'ul1'>
+                            <li>
+                                <img src="./广告位1.jpg" alt="广告位"/>
+                            </li>
+                            <li>
+                                <img src="./广告位2.jpg" alt="广告位"/>
+                            </li>
+                            <li>
+                                <img src="./广告位3.jpg" alt="广告位"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <h2>我的小项目</h2>
+            <div class="row">
+                <ul  class="table table-hover col-sm-7">
+                    <li>
+                        <a class="btn btn-default" role="button" href="./weather/indexWeather.html">
+                            小小天气
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-default" role="button" href="./todolist/indexTodolist.html">
+                            小小备忘录
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-default" role="button" href="./hitbrack/indexHitbrick.html">
+                            小小打砖块
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-default" role="button" href="./clock/indexClock.html">
+                            小小时钟与秒表
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-default" role="button" href="./hitPlane/hitPlane.html">
+                            小小打飞机
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>小小天气</title>
+        <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script> -->
+        <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+        <link rel="stylesheet" href="../bootstrap/bootstrap.css">
+
+        <style>
+            ul li{ list-style: none; } 
+            .box{
+                width: 700px;
+                margin-top: 20px;
+            }
+            #imgbox{
+                position: relative; width: 700px; height: 125px;
+            }
+            #imgweather{
+                 width:500px; position: absolute; left: 100px; 
+            }
+            .weatherType{
+                font-family: 华文彩云， 微软雅黑;
+                font-size: 20px;
+                font-weight:bold;
+                font-style: italic;
+                text-align: justify;
+                color:#FCBF00;
+            }
+            .weatherTem{
+                font-weight:bold;
+                color:#FCBF00;
+            }
+            .weatherDate{
+                /* text-align: center; */
+                color: #B6B5B6;
+            }
+        </style>
+    </head>
+    <body>
+            <div id="app" class="container box">
+                <div id="imgbox">
+                    <div id="imgweather">
+                         <img src="./天气.jpg" alt="横幅：小小天气" title="小小天气" width="100%">
+                    </div>
+                </div>
+
+                <br><br>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8" id="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="请输入想要查询天气的城市" @keyup.enter="searchWeather" v-model="city"/>
+                            <span class="input-group-addon">
+                                <a href="#" @click="searchWeather">
+                                <i> 
+                                    <span >搜索</span>
+                                </i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 hotcity">
+                        <a href="#" @click="changCity('北京')">北京 &nbsp;</a>
+                        <a href="#" @click="changCity('上海')">上海 &nbsp;</a>
+                        <a href="#" @click="changCity('广州')">广州 &nbsp;</a>
+                        <a href="#" @click="changCity('深圳')">深圳</a>
+                    </div>
+                </div>
+                 <br>   
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <ul>
+                        <li v-for="item in weatherList" class="col-sm-2">
+                            <div class="weatherType">
+                                <span>{{item.type}}</span>
+                            </div>
+                            <div class="weatherTem">
+                                <b>{{item.low}}</b>
+                               <br> &emsp;&emsp;~ <br>
+                                <b>{{item.high}}</b>
+                            </div>
+                            <div class="weatherDate">
+                                <span>{{item.date}}</span>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <button type="button" class="btn btn-default col-sm-8" @click="getJoke">听笑话</button>
+                </div>
+                <br>
+                <div class="row">
+                    <p>
+                        {{"&emsp;&emsp;" + joke}}
+                    </p>
+                </div>
+            </div>
+
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="./mainweather.js"></script>
+        
+    </body>
+</html>

@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<htm lang="ch"l>
+	<head>
+		<meta charset="UTF-8">
+		<title>打飞机</title>
+		<style>
+		#airplane{
+			position: absolute;
+			width: 66px;
+			height: 80px;
+			left: 600px;
+			top: 700px
+		}
+		body{
+			background: url(image/background_1.png);
+		}
+		#clip div{
+			width: 6px;
+			height: 14px;
+			background: url(image/bullet1.png);
+			position: absolute;
+			left: 50px;
+			top: 50px;
+		}
+		#enemy div{position: absolute;}
+		</style>
+	</head>
+	<body>
+		<div id = "airplane">
+			<img src = "image/我的飞机.gif" ondragstart = "return false"/>
+		</div>
+		<div id = "clip">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+		<div id = "enemy"></div>
+	</body>
+    <script src = "./tool.js"></script>
+    <script src="./hitplane.js"></script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
